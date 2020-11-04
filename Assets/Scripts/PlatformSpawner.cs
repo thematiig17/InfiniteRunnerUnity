@@ -7,27 +7,25 @@ public class PlatformSpawner : MonoBehaviour
 {
     public GameObject platform;
     System.Random rnd = new System.Random();
-    int i;
-    public float speed;
-    private Rigidbody2D rb;
-    
+    public float delay;
+    float timeFromSpawn;
+    public float[] spawnpoints;
+
     // Start is called before the first frame update
     void Start()
     {
-        rb = platform.GetComponent<Rigidbody2D>();
+        timeFromSpawn = Time.fixedTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        i++;
-        if(i == 200)
+        if (timeFromSpawn >= delay)
         {
-            Instantiate(platform, new Vector2(15, (rnd.Next(-5, 5))), transform.rotation);
-            i = 0;
-            rb.AddForce(new Vector2(-speed, 0f));
+            Instantiate(platform, new Vector2(transform.position.x, spawnpoints[rnd.Next(0, spawnpoints.Length)]), transform.rotation);
+            timeFromSpawn = 0;
         }
-        
-        
+        timeFromSpawn += Time.deltaTime;
+
     }
 }

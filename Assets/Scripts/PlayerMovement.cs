@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,11 +11,14 @@ public class PlayerMovement : MonoBehaviour
     public bool doublejumped;
     private Rigidbody2D rb;
     public float startingY;
+    public Text points;
+    private int numberOfPoints = 0;
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         startingY = transform.position.y;
+        points.text = "0";
     }
 
     // Update is called once per frame
@@ -43,4 +47,16 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(new Vector2(0f, liftingForce * Time.deltaTime));
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "coin")
+        {
+            numberOfPoints++;
+            points.text = numberOfPoints.ToString();
+            Destroy(collision.gameObject, 0);
+        }
+        
+    }
 }
+

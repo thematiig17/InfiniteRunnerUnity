@@ -22,25 +22,42 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    /*private void FixedUpdate()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            if(i == 0)
+            {
+                startingY = transform.position.y;
+            }
+            else if (transform.position.y == startingY)
+            {
+                jumped = false;
+                doublejumped = false;
+            }
+        }
+    }*/
     void Update()
     {
-        if (jumped && transform.position.y<=startingY)
-        {
-            jumped = false;
-            doublejumped = false;
-        }
+        //if (jumped && transform.position.y<=startingY)
+        //{
+        //    jumped = false;
+        //    doublejumped = false;
+        //}
         if (Input.GetMouseButtonDown(0))
         {
+            if (jumped && !doublejumped)
+            {
+                rb.velocity = (new Vector2(0f, jumpPower));
+                doublejumped = true;
+            }
             if (!jumped)
             {
                 rb.velocity = (new Vector2(0f, jumpPower));
                 jumped = true;
             }
-            if (!doublejumped)
-            {
-                rb.velocity = (new Vector2(0f, jumpPower));
-                doublejumped = true;
-            }
+
         }
         if (Input.GetMouseButton(0))
         {
@@ -56,7 +73,11 @@ public class PlayerMovement : MonoBehaviour
             points.text = numberOfPoints.ToString();
             Destroy(collision.gameObject, 0);
         }
-        
+        if (collision.gameObject.tag == "ground")
+        {
+            jumped = false;
+            doublejumped = false;
+        }
     }
 }
 

@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float startingY;
     public Text points;
     private int numberOfPoints = 0;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +78,11 @@ public class PlayerMovement : MonoBehaviour
         {
             jumped = false;
             doublejumped = false;
+        }
+        if (collision.gameObject.tag == "trap")
+        {
+            GameHandler.gameOver = true;
+            player.SetActive(false);
         }
     }
 }

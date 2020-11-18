@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 
-public class PlatformSpawner : MonoBehaviour
+public class TrapSpawner: MonoBehaviour
 {
     public GameObject platform;
+    public int difficulty;
     System.Random rnd = new System.Random();
     public float delay;
     float timeFromSpawn;
@@ -17,7 +18,7 @@ public class PlatformSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timeFromSpawn >= delay)
+        if (rnd.Next(0,10)<=difficulty)
         {
             Instantiate(platform, new Vector2(transform.position.x, spawnpoints[rnd.Next(0, spawnpoints.Length)]), transform.rotation);
             timeFromSpawn = 0;

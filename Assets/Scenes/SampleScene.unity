@@ -1857,6 +1857,7 @@ MonoBehaviour:
   startingY: 0
   points: {fileID: 614409563}
   player: {fileID: 1720752558}
+  Stalker: {fileID: 942207140}
 --- !u!61 &1720752560
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class TrapSpawner: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rnd.Next(0,10)<=difficulty)
+        if (rnd.Next(0, 1000) <= difficulty && timeFromSpawn > delay)
         {
             Instantiate(platform, new Vector2(transform.position.x, spawnpoints[rnd.Next(0, spawnpoints.Length)]), transform.rotation);
             timeFromSpawn = 0;

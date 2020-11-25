@@ -14,12 +14,15 @@ public class PlayerMovement : MonoBehaviour
     public Text points;
     private int numberOfPoints = 0;
     public GameObject player;
+    public GameObject Stalker;
+    private Animator anime;
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         startingY = transform.position.y;
         points.text = "0";
+        anime = Stalker.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -52,11 +55,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = (new Vector2(0f, jumpPower));
                 doublejumped = true;
+                anime.SetBool("isJumping", true);
             }
             if (!jumped)
             {
                 rb.velocity = (new Vector2(0f, jumpPower));
                 jumped = true;
+                anime.SetBool("isJumping", true);
             }
 
         }
@@ -78,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
         {
             jumped = false;
             doublejumped = false;
+            anime.SetBool("isJumping", false);
         }
         if (collision.gameObject.tag == "trap")
         {

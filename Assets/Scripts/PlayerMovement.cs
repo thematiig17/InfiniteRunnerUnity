@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     public float startingY;
     public Text points;
-    private int numberOfPoints = 0;
+    public static int numberOfPoints = 0;
     public GameObject player;
     public GameObject Stalker;
     private Animator anime;
@@ -87,8 +87,12 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.tag == "trap")
         {
-            GameHandler.gameOver = true;
-            player.SetActive(false);
+            GameHandler.trapHitted = true;
+        }
+        if (collision.gameObject.tag == "hp")
+        {
+            GameHandler.healthGained = true;
+            Destroy(collision.gameObject, 0);
         }
     }
 }

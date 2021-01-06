@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "coin")
         {
             numberOfPoints++;
-            points.text = numberOfPoints.ToString();
+            pointUpdater();
             Destroy(collision.gameObject, 0);
         }
         if (collision.gameObject.tag == "ground")
@@ -94,6 +94,20 @@ public class PlayerMovement : MonoBehaviour
             GameHandler.healthGained = true;
             Destroy(collision.gameObject, 0);
         }
+        if (collision.gameObject.tag == "slowTime")
+        {
+            GameHandler.slowTimeActivated = true;
+            Destroy(collision.gameObject, 0);
+        }
+        if (collision.gameObject.tag == "immortal")
+        {
+            GameHandler.immortalityActivated = true;
+            Destroy(collision.gameObject, 0);
+        }
+    }
+    public void pointUpdater()
+    {
+        points.text = numberOfPoints.ToString();
     }
 }
 

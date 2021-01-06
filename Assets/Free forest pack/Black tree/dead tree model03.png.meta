@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: ffe3fda56de186f4ba178beccc272110
+guid: 056f97c113e5aac40849422cc29996bb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -28,7 +28,7 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
-  textureFormat: 1
+  textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2

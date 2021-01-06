@@ -12,6 +12,15 @@ public class GameHandler : MonoBehaviour
     public static bool trapHitted;
     public static bool healthGained;
     private int healthPoints = 3;
+
+    public static bool slowTimeActivated;
+    public static bool immortalityActivated;
+    public static float GameSpeed;
+
+    public float slowTimeDelay;
+    float timeFromSlow;
+    public float immortalityDelay;
+    float timeFromImmortality;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +28,9 @@ public class GameHandler : MonoBehaviour
         gameOver = false;
         trapHitted = false;
         healthGained = false;
+        slowTimeActivated = false;
+        immortalityActivated = false;
+        GameSpeed = 4;
     }
 
     // Update is called once per frame
@@ -30,12 +42,20 @@ public class GameHandler : MonoBehaviour
         }
         if (trapHitted)
         {
-            TrapTriggered();
-            trapHitted = false;
+            if (!immortalityActivated)
+            {
+                TrapTriggered();
+                trapHitted = false;
+            }
+            
         }
         if (healthGained)
         {
             HealthGained();
+        }
+        if (slowTimeActivated)
+        {
+            SlowTimeActivated();
         }
     }
 
@@ -48,6 +68,25 @@ public class GameHandler : MonoBehaviour
     public void TrapTriggered()
     {
         healthPoints--;
+        updateHealth();
+    }
+    public void HealthGained()
+    {
+        if (healthPoints < 3)
+        {
+            healthPoints++;
+            healthGained = false;
+            updateHealth();
+        }
+        else
+        {
+            PlayerMovement.numberOfPoints++;
+            healthGained = false;
+            
+        }
+    }
+    public void updateHealth()
+    {
         if (healthPoints == 3)
         {
             for (int i = 0; i < 3; i++)
@@ -73,17 +112,24 @@ public class GameHandler : MonoBehaviour
             Player.SetActive(false);
         }
     }
-    public void HealthGained()
+    public void SlowTimeActivated()
     {
-        if (healthPoints <= 3)
+        GameSpeed = 2;
+        if (timeFromSlow >= slowTimeDelay)
         {
-            healthPoints++;
-            healthGained = false;
+            slowTimeActivated = false;
+            GameSpeed = 4;
+            timeFromSlow = 0;
         }
-        else
+        timeFromSlow += Time.deltaTime;
+    }
+    public void ImmortalityActivated()
+    {
+        if (timeFromImmortality >= immortalityDelay)
         {
-            PlayerMovement.numberOfPoints++;
-            healthGained = false;
+            immortalityActivated = false;
+            timeFromImmortality = 0;
         }
+        timeFromImmortality += Time.deltaTime;
     }
 }

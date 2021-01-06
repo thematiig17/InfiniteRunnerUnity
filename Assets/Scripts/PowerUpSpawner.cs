@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class TrapSpawner: MonoBehaviour
+public class PowerUpSpawner : MonoBehaviour
 {
-    public GameObject platform;
+    public GameObject[] PowerUps;
     public int difficulty;
     System.Random rnd = new System.Random();
     public float delay;
@@ -18,7 +20,7 @@ public class TrapSpawner: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameHandler.GameSpeed==4)
+        if (GameHandler.GameSpeed == 4)
         {
             delay = 3;
         }
@@ -28,7 +30,7 @@ public class TrapSpawner: MonoBehaviour
         }
         if (rnd.Next(0, 1000) <= difficulty && timeFromSpawn >= delay)
         {
-            Instantiate(platform, new Vector2(transform.position.x, spawnpoints[rnd.Next(0, spawnpoints.Length)]), transform.rotation);
+            Instantiate(PowerUps[rnd.Next(0,PowerUps.Length)], new Vector2(transform.position.x, spawnpoints[rnd.Next(0, spawnpoints.Length)]), transform.rotation);
             timeFromSpawn = 0;
         }
         timeFromSpawn += Time.deltaTime;

@@ -8,6 +8,8 @@ TagManager:
   - coin
   - trap
   - hp
+  - slowTime
+  - immortal
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Player
   - 
   - 
   - 
